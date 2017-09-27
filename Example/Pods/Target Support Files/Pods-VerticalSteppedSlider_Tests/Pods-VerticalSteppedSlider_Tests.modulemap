@@ -1,0 +1,6 @@
+framework module Pods_VerticalSteppedSlider_Tests {
+  umbrella header "Pods-VerticalSteppedSlider_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

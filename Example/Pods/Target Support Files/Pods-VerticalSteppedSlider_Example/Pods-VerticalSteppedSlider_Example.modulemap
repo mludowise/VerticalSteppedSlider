@@ -1,0 +1,6 @@
+framework module Pods_VerticalSteppedSlider_Example {
+  umbrella header "Pods-VerticalSteppedSlider_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

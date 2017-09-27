@@ -1,0 +1,6 @@
+framework module VerticalSteppedSlider {
+  umbrella header "VerticalSteppedSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}
