@@ -1,6 +1,6 @@
 //
-//  VerticalSlider.swift
-//  SliderTest
+//  VSSlider.swift
+//  VerticalSteppedSlider
 //
 //  Created by Melissa Ludowise on 8/24/17.
 //  Copyright © 2017 Mel Ludowise. All rights reserved.

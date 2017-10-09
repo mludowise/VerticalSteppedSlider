@@ -34,8 +34,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        // Do any additional setup after loading the view, typically from a nib.
+        actualLabel1.text = String(format: "%.02f", slider1.value)
+        roundedLabel1.text = String(format: "%.02f", slider1.roundedValue)
+        actualLabel2.text = String(format: "%.02f", slider2.value)
+        roundedLabel2.text = String(format: "%.02f", slider2.roundedValue)
+        actualLabel3.text = String(format: "%.02f", slider3.value)
+        roundedLabel3.text = String(format: "%.02f", slider3.roundedValue)
+        actualLabel4.text = String(format: "%.02f", slider4.value)
+        roundedLabel4.text = String(format: "%.02f", slider4.roundedValue)
+        actualLabel5.text = String(format: "%.02f", slider5.value)
+        roundedLabel5.text = String(format: "%.02f", slider5.roundedValue)
+        actualLabel6.text = String(format: "%.02f", slider6.value)
+        roundedLabel6.text = String(format: "%.02f", slider6.roundedValue)
     }
 
     override func didReceiveMemoryWarning() {
