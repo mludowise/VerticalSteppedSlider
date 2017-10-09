@@ -259,6 +259,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="minimumTrackImage" value="min-track"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="maximumTrackImage" value="max-track"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="thumbImage" value="thumb"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="trackExtendsUnderThumb" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="slider6VaueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="xLv-vq-A5E"/>
@@ -351,6 +352,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="minimumTrackImage" value="min-track"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="maximumTrackImage" value="max-track"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="thumbImage" value="thumb"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="trackExtendsUnderThumb" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="slider3VaueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="gpw-HI-WAW"/>

@@ -28,11 +28,6 @@ public class VSSlider: UIControl {
     }
     
     @IBInspectable
-//    public var value: Float = 0.5 {
-//        didSet {
-//            slider.setValue(value, animated: true)
-//        }
-//    }
     public var value: Float {
         get {
             return slider.value
@@ -58,20 +53,6 @@ public class VSSlider: UIControl {
     
     @IBInspectable
     public var increment: Float = 0.5 {
-        didSet {
-            updateSlider()
-        }
-    }
-    
-    @IBInspectable
-    public var minimumValueImage: UIImage? {
-        didSet {
-            updateSlider()
-        }
-    }
-    
-    @IBInspectable
-    public var maximumValueImage: UIImage? {
         didSet {
             updateSlider()
         }
@@ -140,6 +121,13 @@ public class VSSlider: UIControl {
     }
     
     @IBInspectable
+    public var trackExtendsUnderThumb: Bool = true {
+        didSet {
+            updateSlider()
+        }
+    }
+    
+    @IBInspectable
     public var isContinuous: Bool = true {
         didSet {
             updateSlider()
@@ -196,13 +184,12 @@ public class VSSlider: UIControl {
         slider.value = value
         slider.minimumValue = minimumValue
         slider.maximumValue = maximumValue
-        slider.minimumValueImage = minimumValueImage
-        slider.maximumValueImage = maximumValueImage
         slider.isContinuous = isContinuous
         slider.increment = increment
         slider.trackWidth = trackWidth
         slider.markWidth = markWidth
         slider.markColor = markColor
+        slider.trackExtendsUnderThumb = trackExtendsUnderThumb
         
         if let minimumTrackImage = minimumTrackImage {
             slider.setMinimumTrackImage(minimumTrackImage, for: .normal)

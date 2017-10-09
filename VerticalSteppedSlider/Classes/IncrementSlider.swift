@@ -14,6 +14,7 @@ class InternalSlider: UISlider {
     var trackWidth: CGFloat = 2
     var markWidth: CGFloat = 1
     var markColor: UIColor = UIColor.darkGray
+    var trackExtendsUnderThumb = true
     
     var thumbImage: UIImage? {
         didSet {
@@ -58,6 +59,10 @@ class InternalSlider: UISlider {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        // Get size of thumb
+        let thumbWidth = thumbRect(forBounds: bounds, trackRect: rect, value: 0).size.width
+        let endOffset = trackExtendsUnderThumb ? 0 : thumbWidth
+
         // We create an innerRect in which we paint the lines
         var innerRect = rect.insetBy(dx: 1.0, dy: (rect.height - trackWidth) / 2)
         UIGraphicsBeginImageContextWithOptions(innerRect.size, false, 0)
@@ -71,13 +76,13 @@ class InternalSlider: UISlider {
         if let minimumTrackTintColor = minimumTrackTintColor {
             context.setLineCap(.round)
             context.setLineWidth(trackWidth)
-            context.move(to: CGPoint(x: trackWidth / 2, y: innerRect.height / 2))
-            context.addLine(to: CGPoint(x: innerRect.size.width - trackWidth / 2 - 2, y: innerRect.height / 2))
+            context.move(to: CGPoint(x: (trackWidth + endOffset) / 2, y: innerRect.height / 2))
+            context.addLine(to: CGPoint(x: innerRect.size.width - (trackWidth + endOffset) / 2 - 2, y: innerRect.height / 2))
             context.setStrokeColor(minimumTrackTintColor.cgColor)
             context.strokePath()
             minimumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
         } else if let currentMinimumTrackImage = currentMinimumTrackImage {
-            currentMinimumTrackImage.draw(in: CGRect(x: 0, y: (innerRect.height - trackWidth) / 2, width: innerRect.width, height: trackWidth))
+            currentMinimumTrackImage.draw(in: CGRect(x: endOffset / 2, y: (innerRect.height - trackWidth) / 2, width: innerRect.width - endOffset, height: trackWidth))
             minimumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
         }
         
@@ -86,21 +91,22 @@ class InternalSlider: UISlider {
         if let maximumTrackTintColor = maximumTrackTintColor  {
             context.setLineCap(.round)
             context.setLineWidth(trackWidth)
-            context.move(to: CGPoint(x: trackWidth / 2, y: innerRect.height / 2))
-            context.addLine(to: CGPoint(x: innerRect.size.width - trackWidth / 2 - 2, y: innerRect.height / 2))
+            context.move(to: CGPoint(x: (trackWidth + endOffset) / 2, y: innerRect.height / 2))
+            context.addLine(to: CGPoint(x: innerRect.size.width - (trackWidth + endOffset) / 2 - 2, y: innerRect.height / 2))
             context.setStrokeColor(maximumTrackTintColor.cgColor)
             context.strokePath()
             maximumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
         } else if let currentMaximumTrackImage = currentMaximumTrackImage {
-            currentMaximumTrackImage.draw(in: CGRect(x: 0, y: (innerRect.height - trackWidth) / 2, width: innerRect.width, height: trackWidth))
+            currentMaximumTrackImage.draw(in: CGRect(x: endOffset / 2, y: (innerRect.height - trackWidth) / 2, width: innerRect.width - endOffset, height: trackWidth))
             maximumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
         }
         
         if increment != 0 {
+            
             // Set marks on selected side
             minimumSide.draw(at: CGPoint.zero)
             for value in range {
-                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * innerRect.width
+                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * (innerRect.width - thumbWidth) + thumbWidth / 2
                 context.setLineCap(.butt)
                 context.setLineWidth(markWidth)
                 context.move(to: CGPoint(x: position, y: innerRect.height / 2 - trackWidth / 2))
@@ -113,7 +119,7 @@ class InternalSlider: UISlider {
             // Set marks on unselected side
             maximumSide.draw(at: CGPoint.zero)
             for value in range {
-                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * innerRect.width
+                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * (innerRect.width - thumbWidth) + thumbWidth / 2
                 context.setLineCap(.butt)
                 context.setLineWidth(markWidth)
                 context.move(to: CGPoint(x: position, y: innerRect.height / 2 - trackWidth / 2))
