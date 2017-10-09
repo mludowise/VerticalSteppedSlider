@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## VerticalSteppedSlider
 
-Copyright (c) 2017 mludowise <mludowise@gmail.com>
+Copyright (c) 2017 Mel Ludowise <mludowise@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

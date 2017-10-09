@@ -1,15 +1,15 @@
 {
   "name": "VerticalSteppedSlider",
   "version": "0.1.0",
-  "summary": "A short description of VerticalSteppedSlider.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "A completely configurable slider with options for steps, vertical orientation, and custom colors.",
+  "description": "A completely configurable slider with options for steps, vertical orientation, and custom colors. Configurable in storyboard.",
   "homepage": "https://github.com/mludowise/VerticalSteppedSlider",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "mludowise": "mludowise@gmail.com"
+    "Mel Ludowise": "mludowise@gmail.com"
   },
   "source": {
     "git": "https://github.com/mludowise/VerticalSteppedSlider.git",
@@ -18,5 +18,6 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "VerticalSteppedSlider/Classes/**/*"
+  "source_files": "VerticalSteppedSlider/Classes/**/*",
+  "frameworks": "UIKit"
 }
