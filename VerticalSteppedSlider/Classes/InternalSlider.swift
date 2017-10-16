@@ -11,18 +11,6 @@ import UIKit
 class InternalSlider: UISlider {
 
     var increment: Float = 0
-    var trackWidth: CGFloat = 2
-    var markWidth: CGFloat = 1
-    var markColor: UIColor = UIColor.darkGray
-    var trackExtendsUnderThumb = true
-    var minimumTrackImage: UIImage?
-    var maximumTrackImage: UIImage?
-
-    var thumbImage: UIImage? {
-        didSet {
-            setThumbImage(thumbImage, for: .normal)
-        }
-    }
     
     var roundedValue: Float {
         get {
@@ -54,104 +42,6 @@ class InternalSlider: UISlider {
     @objc private func endSliding() {
         setValue(round(super.value, to: increment), animated: true)
         sendActions(for: .valueChanged)
-    }
-    
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
-        // Get size of thumb
-        let thumbWidth = thumbRect(forBounds: bounds, trackRect: rect, value: 0).size.width
-        let endOffset = trackExtendsUnderThumb ? 0 : thumbWidth
-        
-        // We create an innerRect in which we paint the lines
-        let innerRect = rect.insetBy(dx: 1.0, dy: (rect.height - trackWidth) / 2)
-        UIGraphicsBeginImageContextWithOptions(innerRect.size, false, 0)
-//        let context = UIGraphicsGetCurrentContext()!
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-
-        // Get the range for drawing marks
-        let range = getRangeForMarks()
-        
-        // Minimum side
-        var minimumSide = UIImage()
-        if let minimumTrackImage = minimumTrackImage {
-            minimumTrackImage.draw(in: CGRect(x: endOffset / 2, y: (innerRect.height - trackWidth) / 2, width: innerRect.width - endOffset, height: trackWidth))
-            minimumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-        } else {
-            let minimumTrackTintColor = self.minimumTrackTintColor ?? self.tintColor ?? UIColor.blue
-            context.setLineCap(.round)
-            context.setLineWidth(trackWidth)
-            context.move(to: CGPoint(x: (trackWidth + endOffset) / 2, y: innerRect.height / 2))
-            context.addLine(to: CGPoint(x: innerRect.size.width - (trackWidth + endOffset) / 2 - 2, y: innerRect.height / 2))
-            context.setStrokeColor(minimumTrackTintColor.cgColor)
-            context.strokePath()
-            minimumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-        }
-        
-        // Maximum side
-        var maximumSide = UIImage()
-        if let maximumTrackImage = maximumTrackImage {
-            maximumTrackImage.draw(in: CGRect(x: endOffset / 2, y: (innerRect.height - trackWidth) / 2, width: innerRect.width - endOffset, height: trackWidth))
-            maximumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-        } else {
-            let maximumTrackTintColor = self.maximumTrackTintColor ?? UIColor.lightGray
-            context.setLineCap(.round)
-            context.setLineWidth(trackWidth)
-            context.move(to: CGPoint(x: (trackWidth + endOffset) / 2, y: innerRect.height / 2))
-            context.addLine(to: CGPoint(x: innerRect.size.width - (trackWidth + endOffset) / 2 - 2, y: innerRect.height / 2))
-            context.setStrokeColor(maximumTrackTintColor.cgColor)
-            context.strokePath()
-            maximumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-        }
-        
-        if increment != 0 {
-            
-            // Set marks on selected side
-            minimumSide.draw(at: CGPoint.zero)
-            for value in range {
-                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * (innerRect.width - thumbWidth) + thumbWidth / 2
-                context.setLineCap(.butt)
-                context.setLineWidth(markWidth)
-                context.move(to: CGPoint(x: position, y: innerRect.height / 2 - trackWidth / 2))
-                context.addLine(to: CGPoint(x: position, y: innerRect.height / 2 + trackWidth / 2))
-                context.setStrokeColor(markColor.cgColor)
-                context.strokePath()
-            }
-            minimumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-            
-            // Set marks on unselected side
-            maximumSide.draw(at: CGPoint.zero)
-            for value in range {
-                let position = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * (innerRect.width - thumbWidth) + thumbWidth / 2
-                context.setLineCap(.butt)
-                context.setLineWidth(markWidth)
-                context.move(to: CGPoint(x: position, y: innerRect.height / 2 - trackWidth / 2))
-                context.addLine(to: CGPoint(x: position, y: innerRect.height / 2 + trackWidth / 2))
-                context.setStrokeColor(markColor.cgColor)
-                context.strokePath()
-            }
-            maximumSide = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero)
-        }
-
-        UIGraphicsEndImageContext()
-        
-        setMinimumTrackImage(minimumSide, for: .normal)
-        setMaximumTrackImage(maximumSide, for: .normal)
-    }
-    
-    private func getRangeForMarks() -> [Float] {
-        let minMark = minimumValue - minimumValue.truncatingRemainder(dividingBy: increment)
-        var range = Array(stride(from: minMark, to: maximumValue, by: increment))
-        
-        if range.contains(minimumValue) {
-            range.removeFirst()
-        }
-        
-        return range
     }
 }
 

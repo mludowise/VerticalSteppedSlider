@@ -8,7 +8,7 @@ import VerticalSteppedSlider
 class TableOfContentsSpec: QuickSpec {
     
     override func spec() {
-        describe("appearance") {
+        describe("appearance vertical") {
             let frame = CGRect(x: 0, y: 0, width: 400, height: 400)
             var slider: VSSlider!
 
@@ -22,7 +22,7 @@ class TableOfContentsSpec: QuickSpec {
             
             it("width") {
                 slider.maximumTrackTintColor = .green
-//                slider.minimumTrackTintColor = .red
+                slider.minimumTrackTintColor = .red
                 slider.trackWidth = 10
                 expect(slider) == recordSnapshot()
             }
@@ -40,6 +40,38 @@ class TableOfContentsSpec: QuickSpec {
             }
         }
         
+        describe("appearance horizontal") {
+            let frame = CGRect(x: 0, y: 0, width: 400, height: 400)
+            var slider: VSSlider!
+            
+            beforeEach {
+                slider = VSSlider(frame: frame)
+                slider.minimumValue = -1
+                slider.maximumValue = 1
+                slider.increment = 0.25
+                slider.value = 0
+                slider.vertical = false
+            }
+            
+            it("width") {
+                slider.maximumTrackTintColor = .green
+                slider.minimumTrackTintColor = .red
+                slider.trackWidth = 10
+                expect(slider) == recordSnapshot()
+            }
+            
+            //            it("colors") {
+            //                slider.maximumTrackTintColor = .green
+            //                slider.minimumTrackTintColor = .red
+            ////                slider.markColor = .yellow
+            ////                slider.markWidth = 3
+            //                expect(slider) == recordSnapshot()
+            //            }
+            
+            it("marks") {
+                
+            }
+        }
         
 //        describe("these will fail") {
 //
@@ -83,33 +115,4 @@ class TableOfContentsSpec: QuickSpec {
 //        }
     }
     
-    func saveImage(view: UIView, filename: String) {
-        UIGraphicsBeginImageContext(view.bounds.size)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            print("Couldn't save image")
-            return
-        }
-        
-        view.layer.render(in: context)
-        
-        let _image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        guard let image = _image else {
-                print("No image")
-                return
-        }
-        
-        guard let data = UIImagePNGRepresentation(image) else {
-                print("Nodata")
-                return
-        }
-        
-        let filepath = "~/Desktop/" + filename + ".png"
-        do {
-            try data.write(to: URL(fileURLWithPath: filepath))
-        } catch let error {
-            print(error)
-        }
-    }
 }
