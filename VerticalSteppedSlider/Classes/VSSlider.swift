@@ -33,7 +33,7 @@ public class VSSlider: UIControl {
             return slider.value
         }
         set {
-            slider.setValue(value, animated: true)
+            slider.setValue(newValue, animated: true)
         }
     }
     
@@ -183,7 +183,6 @@ public class VSSlider: UIControl {
             slider.transform = .identity
         }
         
-        slider.value = value
         slider.minimumValue = minimumValue
         slider.maximumValue = maximumValue
         slider.isContinuous = isContinuous
