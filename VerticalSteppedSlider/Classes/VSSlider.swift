@@ -191,17 +191,10 @@ public class VSSlider: UIControl {
         slider.markColor = markColor
         slider.trackExtendsUnderThumb = trackExtendsUnderThumb
         
-        if let minimumTrackImage = minimumTrackImage {
-            slider.setMinimumTrackImage(minimumTrackImage, for: .normal)
-        } else if let minimumTrackTintColor = minimumTrackTintColor {
-            slider.minimumTrackTintColor = minimumTrackTintColor
-        }
-
-        if let maximumTrackImage = maximumTrackImage {
-            slider.setMaximumTrackImage(maximumTrackImage, for: .normal)
-        } else if let maximumTrackTintColor = maximumTrackTintColor {
-            slider.maximumTrackTintColor = maximumTrackTintColor
-        }
+        slider.minimumTrackImage = minimumTrackImage
+        slider.minimumTrackTintColor = minimumTrackTintColor
+        slider.maximumTrackImage = maximumTrackImage
+        slider.maximumTrackTintColor = maximumTrackTintColor
 
         if let thumbImage = thumbImage {
             slider.setThumbImage(thumbImage, for: .normal)

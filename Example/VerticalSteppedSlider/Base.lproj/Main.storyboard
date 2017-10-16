@@ -27,6 +27,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="ascending" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="maximumTrackTintColor">
+                                        <color key="value" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="slider1VaueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="BEr-EG-oI3"/>
@@ -365,6 +371,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="vertical" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="ascending" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="slider4VaueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Tnx-kv-U3a"/>
