@@ -13,6 +13,7 @@ public class VSSlider: UIControl {
     
     private let slider = InternalSlider()
 
+    // If orientation of slider should be vertical or horizontal. Default is true.
     @IBInspectable
     public var vertical: Bool = true {
         didSet {
@@ -20,6 +21,11 @@ public class VSSlider: UIControl {
         }
     }
     
+    // Ascending is defined as:
+    // - Min on the left and max on the right when horizontal in left-to-right localized layouts.
+    // - Min on the right and max on the left when horizontal in right-to-left localized layouts.
+    // - Min on top and max on the bottom when vertical
+    // Default is false
     @IBInspectable
     public var ascending: Bool = false {
         didSet {
@@ -27,6 +33,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // Current raw value of the slider, not rounded to the nearest the increment. See UISlider.value for more information.
     @IBInspectable
     public var value: Float {
         get {
@@ -37,6 +44,8 @@ public class VSSlider: UIControl {
         }
     }
     
+    // See UISlider.minimumValue for more information.
+    // Default is 0.
     @IBInspectable
     public var minimumValue: Float = 0 {
         didSet {
@@ -44,6 +53,8 @@ public class VSSlider: UIControl {
         }
     }
     
+    // See UISliuder.maximumValue for more information.
+    // Default is 1
     @IBInspectable
     public var maximumValue: Float = 1 {
         didSet {
@@ -51,6 +62,9 @@ public class VSSlider: UIControl {
         }
     }
     
+    // The step increment for the slider.
+    // Set to 0 if the slider should be smooth and not round to the nearest increment.
+    // Default is 0.5
     @IBInspectable
     public var increment: Float = 0.5 {
         didSet {
@@ -58,6 +72,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // The thickness of the slider track in points. Default is 2.
     @IBInspectable
     public var trackWidth: CGFloat = 2 {
         didSet {
@@ -65,6 +80,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // The thickness of the increment marks on the slider in points. Default is 1.
     @IBInspectable
     public var markWidth: CGFloat = 1 {
         didSet {
@@ -72,6 +88,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // Color of the marks of the slider.
     @IBInspectable
     public var markColor: UIColor = UIColor.darkGray {
         didSet {
@@ -79,6 +96,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // If minimumTrackImage is non-nil, this is ignored. See UISlider.minimumTrackTintColor for more information.
     @IBInspectable
     public var minimumTrackTintColor: UIColor? {
         didSet {
@@ -86,12 +104,14 @@ public class VSSlider: UIControl {
         }
     }
     
+    // If maximumTrackImage is non-nil, the image will override this color. See maximumTrackTintColor for more information.
     @IBInspectable open var maximumTrackTintColor: UIColor? {
         didSet {
             updateSlider()
         }
     }
     
+    // If thumbImage is non-nil, the image will override this color. See UISlider.thumbTintColor for more information.
     @IBInspectable
     public var thumbTintColor: UIColor? {
         didSet {
@@ -99,6 +119,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // If non-nil, overrides minimumTrackTintColor. See UISlider.setMinimumTrackImage() for more information.
     @IBInspectable
     public var minimumTrackImage: UIImage? {
         didSet {
@@ -106,6 +127,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // If non-nil, overrides maximumTrackTintColor. See UISlider.setMaximumTrackImage() for more information.
     @IBInspectable
     public var maximumTrackImage: UIImage? {
         didSet {
@@ -113,6 +135,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // If non-nil, overrides thumbTintColor. See UISlider.setThumbImage() for more information.
     @IBInspectable
     public var thumbImage: UIImage? {
         didSet {
@@ -120,6 +143,10 @@ public class VSSlider: UIControl {
         }
     }
     
+    // Defines if the track should be slightly wider than its min and max values to accomodate for
+    // the width of the slider thumb. The value "true" replicates the behavior of UISlider but the
+    // increment marks will appear as though there is more space between the first and last marks
+    // and the ends of the slider.
     @IBInspectable
     public var trackExtendsUnderThumb: Bool = true {
         didSet {
@@ -127,6 +154,7 @@ public class VSSlider: UIControl {
         }
     }
     
+    // See UISlider.isContinuous.
     @IBInspectable
     public var isContinuous: Bool = true {
         didSet {
@@ -134,6 +162,13 @@ public class VSSlider: UIControl {
         }
     }
     
+    // Returns the value rounded to the nearest increment.
+    public var roundedValue: Float {
+        get {
+            return slider.roundedValue
+        }
+    }
+
     override public var isEnabled: Bool {
         set {
             super.isEnabled = newValue
@@ -156,13 +191,6 @@ public class VSSlider: UIControl {
         }
     }
 
-    
-    public var roundedValue: Float {
-        get {
-            return slider.roundedValue
-        }
-    }
-    
     private var lastDrawnSliderSize = CGSize.zero
     
     // required for IBDesignable class to properly render
