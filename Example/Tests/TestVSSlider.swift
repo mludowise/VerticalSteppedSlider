@@ -18,6 +18,9 @@ class TestVSSlider: QuickSpec {
                 slider.maximumValue = 1
                 slider.increment = 0.25
                 slider.value = 0
+                if #available(iOS 10.0, *) {
+                    slider.semanticContentAttribute = .forceLeftToRight
+                }
             }
             
             it("width") {
@@ -85,6 +88,25 @@ class TestVSSlider: QuickSpec {
                 slider.minimumTrackTintColor = .red
                 slider.trackWidth = 10
                 expect(slider) == snapshot()
+            }
+            
+            if #available(iOS 10.0, *) {
+                it("right-to-left vertical") {
+                    slider.semanticContentAttribute = .forceRightToLeft
+                    slider.maximumTrackTintColor = .green
+                    slider.minimumTrackTintColor = .red
+                    slider.trackWidth = 10
+                    expect(slider) == snapshot()
+                }
+                
+                it("right-to-left horizontal") {
+                    slider.semanticContentAttribute = .forceRightToLeft
+                    slider.vertical = false
+                    slider.maximumTrackTintColor = .green
+                    slider.minimumTrackTintColor = .red
+                    slider.trackWidth = 10
+                    expect(slider) == snapshot()
+                }
             }
             
             it("set value") {

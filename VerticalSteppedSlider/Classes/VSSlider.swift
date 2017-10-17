@@ -144,6 +144,19 @@ public class VSSlider: UIControl {
         }
     }
     
+    @available(iOS 9.0, *)
+    public override var semanticContentAttribute: UISemanticContentAttribute {
+        set {
+            super.semanticContentAttribute = newValue
+            slider.semanticContentAttribute = newValue
+            updateSlider()
+        }
+        get {
+            return super.semanticContentAttribute
+        }
+    }
+
+    
     public var roundedValue: Float {
         get {
             return slider.roundedValue
@@ -172,14 +185,26 @@ public class VSSlider: UIControl {
     }
     
     fileprivate func updateSlider() {
-        switch (vertical, ascending) {
-        case (true, false):
+        let layoutDirection: UIUserInterfaceLayoutDirection
+        
+        if #available(iOS 10.0, *) {
+            layoutDirection = slider.effectiveUserInterfaceLayoutDirection
+        } else if #available(iOS 9.0, *) {
+            layoutDirection = UIView.userInterfaceLayoutDirection(for: slider.semanticContentAttribute)
+        } else {
+            layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
+        }
+        
+        switch (vertical, ascending, layoutDirection) {
+        case (true, false, .leftToRight),
+             (true, true, .rightToLeft):
             slider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi) * -0.5)
-        case (true, true):
+        case (true, true, .leftToRight),
+             (true, false, .rightToLeft):
             slider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi) * 0.5).scaledBy(x: 1, y: -1)
-        case (false, true):
+        case (false, true, _):
             slider.transform = CGAffineTransform(scaleX: 1, y: -1)
-        case (false, false):
+        case (false, false, _):
             slider.transform = .identity
         }
         
