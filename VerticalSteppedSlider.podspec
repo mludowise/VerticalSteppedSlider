@@ -22,7 +22,7 @@ A completely configurable slider with options for steps, vertical orientation, a
                        DESC
 
   s.homepage         = 'https://github.com/mludowise/VerticalSteppedSlider'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots     = 'https://github.com/mludowise/VerticalSteppedSlider/raw/master/readme_img/demo.gif', 'https://github.com/mludowise/VerticalSteppedSlider/raw/master/readme_img/value-limits@2x.png', 'https://github.com/mludowise/VerticalSteppedSlider/raw/master/readme_img/colors@2x.png', 'https://github.com/mludowise/VerticalSteppedSlider/raw/master/readme_img/images@2x.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Mel Ludowise' => 'mludowise@gmail.com' }
   s.source           = { :git => 'https://github.com/mludowise/VerticalSteppedSlider.git', :tag => s.version.to_s }
