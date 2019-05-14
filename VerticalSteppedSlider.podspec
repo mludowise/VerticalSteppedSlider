@@ -15,7 +15,7 @@ A completely configurable slider with options for steps, vertical orientation, a
   s.ios.deployment_target = '8.0'
 
   s.source_files    = 'VerticalSteppedSlider/Classes/**/*'
-  s.swift_version   = '4.2'
+  s.swift_version   = '5.0'
   
   # s.resource_bundles = {
   #   'VerticalSteppedSlider' => ['VerticalSteppedSlider/Assets/*.png']
