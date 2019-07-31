@@ -213,15 +213,7 @@ public class VSSlider: UIControl {
     }
     
     fileprivate func updateSlider() {
-        let layoutDirection: UIUserInterfaceLayoutDirection
-        
-        if #available(iOS 10.0, *) {
-            layoutDirection = slider.effectiveUserInterfaceLayoutDirection
-        } else if #available(iOS 9.0, *) {
-            layoutDirection = UIView.userInterfaceLayoutDirection(for: slider.semanticContentAttribute)
-        } else {
-            layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
-        }
+        let layoutDirection: UIUserInterfaceLayoutDirection = slider.effectiveUserInterfaceLayoutDirection
         
         switch (vertical, ascending, layoutDirection) {
         case (true, false, .leftToRight),
@@ -234,6 +226,8 @@ public class VSSlider: UIControl {
             slider.transform = CGAffineTransform(scaleX: 1, y: -1)
         case (false, false, _):
             slider.transform = .identity
+        default:
+            break
         }
         
         slider.minimumValue = minimumValue
