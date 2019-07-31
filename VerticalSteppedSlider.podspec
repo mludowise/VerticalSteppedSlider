@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'VerticalSteppedSlider'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A completely configurable slider with options for steps, vertical orientation, and custom colors.'
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ A completely configurable slider with options for steps, vertical orientation, a
   s.author           = { 'Mel Ludowise' => 'mludowise@gmail.com' }
   s.source           = { :git => 'https://github.com/mludowise/VerticalSteppedSlider.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.3'
 
   s.source_files = 'VerticalSteppedSlider/Classes/**/*'
   
