@@ -233,6 +233,8 @@ public class VSSlider: UIControl {
         case (false, true, _):
             slider.transform = CGAffineTransform(scaleX: 1, y: -1)
         case (false, false, _):
+            fallthrough
+        default:
             slider.transform = .identity
         }
         
