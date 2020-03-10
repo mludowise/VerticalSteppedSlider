@@ -233,6 +233,8 @@ public class VSSlider: UIControl {
         case (false, true, _):
             slider.transform = CGAffineTransform(scaleX: 1, y: -1)
         case (false, false, _):
+            fallthrough
+        default:
             slider.transform = .identity
         }
         
@@ -272,7 +274,7 @@ public class VSSlider: UIControl {
         }
     }
     
-    override public func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControlEvents) {
+    override public func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         slider.addTarget(target, action: action, for: controlEvents)
     }
     
