@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "VerticalSteppedSlider",
+    platforms: [
+        .iOS(.v8),
+    ],
     products: [
         .library(
         	name: "VerticalSteppedSlider",
